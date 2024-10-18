@@ -6,33 +6,31 @@ pipeline{
     }
 
     parameters{
-        string(name: 'NAME', defaultValue: 'Jenkins Param string',  description: 'Jenkins Param string')
-        text(name: 'TEXT', defaultValue: 'Jenkins Param text',  description: 'Jenkins Param text')
-        booleanParam(name: 'TOOGLE', defaulValue: true,  description: 'Jenkins Param boolean')
-        choise(name: 'CHOICE', choices:['un', 'deux', 'trois'],  description: 'Jenkins Param text')
-        password(name: 'PASSWORD', description: 'Jenkins Param un mot de passe')
+        string(name: 'PERSONNE', defaultValue: 'M. Jenkins', description: 'À qui devrais-je dire bonjour ?')
+        text(name: 'BIOGRAPHIE', defaultValue: '', description: 'Entrez des informations sur la personne')
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Activez cette valeur')
+        choice(name: 'CHOIX', choices: ['Un', 'Deux', 'Trois'], description: 'Faites un choix')
+        password(name: 'MOT_DE_PASSE', defaultValue: 'SECRET', description: 'Entrez un mot de passe')
     }
 
     stages{
         stage('Build'){
-
-            options{
-                timestamps()
-            }
-
-            steps{
-                echo  'Building...'
-
+            steps {
+                echo "Bonjour ${PERSONNE}"
+                echo "Biographie : ${BIOGRAPHIE}"
+                echo "Toggle : ${TOGGLE}"
+                echo "Choix : ${CHOIX}"
+                echo "Mot de passe : ${MOT_DE_PASSE}"
             }
         }
 
         stage('Tests'){
-            steps{
-                echo  "NAME: ${NAME}"
-                echo  "TEXT: ${TEXT}"
-                echo  "TOOGLE: ${TOOGLE}"
-                echo  "CHOICE: ${CHOICE}"
-                echo  "PASSWORD: ${PASSWORD}"
+            steps {
+                echo "Bonjour ${PERSONNE}"
+                echo "Biographie : ${BIOGRAPHIE}"
+                echo "Toggle : ${TOGGLE}"
+                echo "Choix : ${CHOIX}"
+                echo "Mot de passe : ${MOT_DE_PASSE}"
             }
         }
     }
