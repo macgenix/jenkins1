@@ -1,10 +1,6 @@
 pipeline{
     agent any
 
-    triggers{
-       pollSCM('* * * * *')
-
-    }
 
     stages{
         stage('Build'){
@@ -13,20 +9,22 @@ pipeline{
             }
         }
 
-        stage('Tests'){
-            steps {
-                echo "Test"
+        stage('Deploy PROD'){
+            input{
+                message "Voulez-vous deployer en PROD ?"
+                ok 'deploy !'
+                submitter 'admin, devops'
+                submitParameter 'USER_SUBMIT'
+                parameters{
+                    string(name: 'VERSION', defaultValue:'latest', description: 'La version deployée')
+                }
             }
-        }
-    }
 
-    post{
-        always{
-            echo 'always !'
-        }
-
-        success{
-            echo 'success !'
+            steps {
+                echo "USER : ${USER_SUBMIT}"
+                echo "VERSION : ${VERSION}"
+                echo "Deployement en production"
+            }
         }
     }
 }
