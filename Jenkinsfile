@@ -10,19 +10,11 @@ pipeline{
         }
 
         stage('Deploy PROD'){
-            input{
-                message "Voulez-vous deployer en PROD ?"
-                ok 'deploy !'
-                submitter 'admin, devops'
-                submitterParameter 'USER_SUBMIT'
-                parameters{
-                    string(name: 'VERSION', defaultValue:'latest', description: 'La version deployée')
-                }
+            when{
+                branch 'prod'
             }
 
             steps {
-                echo "USER : ${USER_SUBMIT}"
-                echo "VERSION : ${VERSION}"
                 echo "Deployement en production"
             }
         }
