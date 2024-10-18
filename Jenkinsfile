@@ -1,16 +1,20 @@
 pipeline{
     agent any
     
-    agent{
-        docker{
-            image 'node:23-alpine'
-        }
+    options{
+        timeout(time:1, unit:"HOURS")
     }
 
     stages{
         stage('Build'){
+            
+            options{
+                timestamps()
+            }
+
             steps{
-                sh 'npm -v'
+                echo  'Building...'
+
             }
         }
     }
