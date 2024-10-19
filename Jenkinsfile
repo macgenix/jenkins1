@@ -1,17 +1,17 @@
 pipeline{
     agent any
 
-    tools{
-        gradle 'gradle8.11'
-        nodejs 'node23'
-    }
-
     stages{
         stage('Build'){
             steps{
-                sh 'gradle -v'
-                sh 'node -v'
+                echo 'mvn clean package'
             }
+        }
+    }
+
+    post{
+        success {
+            emailtext to: 'macgenix@gmail.com', body: 'notification jenkins', subject: 'notif jenkins'
         }
     }
 }
