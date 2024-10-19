@@ -11,7 +11,7 @@ pipeline{
 
     post{
         success {
-            emailtext to: 'macgenix@gmail.com', body: 'notification jenkins', subject: 'notif jenkins'
+            emailext to: 'macgenix@gmail.com', body: 'notification jenkins', subject: 'notif jenkins'
         }
     }
 }
