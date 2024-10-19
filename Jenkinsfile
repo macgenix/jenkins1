@@ -17,7 +17,7 @@ pipeline{
             when{
                 allOf{
                     branch 'main'
-                    equals  expectedValue: true, actualValue: params.DEPLOY_TO
+                    equals  expected: true, actual: params.DEPLOY_TO
 
                 }
             }
