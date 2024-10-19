@@ -1,6 +1,10 @@
 pipeline{
     agent any
 
+    parameters{
+        booleanParam(name: 'DEPLOY_TO', defaultValue: false,  description: 'Production ?')
+
+    }
 
     stages{
         stage('Build'){
@@ -11,7 +15,11 @@ pipeline{
 
         stage('Deploy PROD'){
             when{
-                branch 'main'
+                allOf{
+                    branch 'main'
+                    equals  expectedValue: true, actualValue: params.DEPLOY_TO
+
+                }
             }
 
             steps {
